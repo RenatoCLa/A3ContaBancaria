@@ -5,7 +5,13 @@ describe('Testes da classe Conta', () =>{
     
     //Variáveis da classe conta na inicialização - fabio
     it('Deve apresentar as variáveis certas quando criado', () =>{
-        
+        const pessoaTest = new Pessoa("nome", 0);
+        const contaTest = new Conta(pessoaTest, 0);
+
+        expect(typeof contaTest).toBe('object');
+        expect(contaTest.nome).toBe(pessoaTest.nome);
+        expect(contaTest.saldo).toBe(0);
+        expect(contaTest.pessoa).toBe(pessoaTest);
     });
 
     //Depositar um valor positivo
