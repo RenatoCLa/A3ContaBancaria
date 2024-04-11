@@ -8,21 +8,34 @@ class Conta {
     depositar(deposito){
         if(this.pessoa.dinheiro >= deposito){
             this.saldo += deposito;
-            this.pessoa.pagarDeposito(deposito);
+            this.pessoa.realizarDeposito(deposito);
         }else{
-            console.log("Você não possui dinheiro o suficiente para realizar o deposito");
+            console.log("Você não possui dinheiro o suficiente para realizar o deposito.");
         }
-        
+    }
+
+    receberTransferencia(transferencia){
+        this.saldo += transferencia;
     }
 
     sacar(valor){
-        this.saldo -= valor;
-        this.pessoa.receber(valor);
+        if(this.saldo >= valor){
+            this.saldo -= valor;
+            this.pessoa.receber(valor);
+        }else{
+            console.log("Você não possui saldo suficiente.");
+        }
     }
 
     transferir(valor, conta){
-        this.saldo -= valor;
-        conta.depositar(valor);
+        if(conta.nome === this.nome){
+            console.log("Não é possivel realizar uma tranferência para a sua própria conta.");
+        }else if(this.saldo >= valor){
+            this.saldo -= valor;
+            conta.receberTransferencia(valor);
+        }else{
+            console.log("Saldo insuficiente.");
+        }
     }
 
     verSaldo(){

@@ -4,7 +4,7 @@ class Pessoa {
         this.dinheiro = dinheiro;
     }
 
-    pagarDeposito(valor){
+    realizarDeposito(valor){
         this.dinheiro -= valor;
     }
 
