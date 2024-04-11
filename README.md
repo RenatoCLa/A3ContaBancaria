@@ -1,7 +1,7 @@
                                               💱 CONTA BANCÁRIA 💱
 
 
-O aplicativo de Conta Bancária tem como finalidade principal fornecer aos usuários uma ferramenta eficiente para gerenciamento de suas finanças pessoais. Através deste aplicativo, os usuários podem realizar diversas operações bancárias básicas, como depósito, saque e transferência de fundos, além de acompanhar o saldo atual e revisar o histórico de transações.
+O aplicativo de Conta Bancária tem como finalidade principal fornecer aos usuários uma ferramenta eficiente para gerenciamento de suas finanças pessoais. Através deste aplicativo, os usuários podem realizar diversas operações bancárias básicas, como depósito, saque e transferência de fundos, além de acompanhar o saldo atual e revisar o histórico de transações.*
 
 Com este aplicativo, os usuários podem:
 Gerenciar finanças pessoais: O aplicativo oferece uma maneira conveniente para os usuários controlarem suas finanças, permitindo que realizem operações bancárias essenciais de forma rápida e fácil.
