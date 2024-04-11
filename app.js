@@ -9,6 +9,8 @@ const GuConta = new Conta(0, Gustavo);
 
 FabConta.depositar(5000);
 FabConta.transferir(20, GuConta);
+FabConta.depositar(0);
+FabConta.depositar(-500);
 
 FabConta.verSaldo();
 Fabiano.verDinheiro();

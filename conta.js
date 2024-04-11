@@ -6,7 +6,10 @@ class Conta {
     }
 
     depositar(deposito){
-        if(this.pessoa.dinheiro >= deposito){
+        if(deposito <= 0){
+            console.log("numero inválido");
+            return "numero inválido";
+        }else if(this.pessoa.dinheiro >= deposito){
             this.saldo += deposito;
             this.pessoa.realizarDeposito(deposito);
         }else{
@@ -19,7 +22,10 @@ class Conta {
     }
 
     sacar(valor){
-        if(this.saldo >= valor){
+        if(valor <= 0){
+            console.log("numero inválido");
+            return "numero inválido";
+        }else if(this.saldo >= valor){
             this.saldo -= valor;
             this.pessoa.receber(valor);
         }else{
@@ -28,8 +34,12 @@ class Conta {
     }
 
     transferir(valor, conta){
-        if(conta.nome === this.nome){
+        if(valor <= 0){
+            console.log("numero inválido");
+            return "numero inválido";
+        }else if(conta.nome === this.nome){
             console.log("Não é possivel realizar uma tranferência para a sua própria conta.");
+            return "transferencia para a própria conta";
         }else if(this.saldo >= valor){
             this.saldo -= valor;
             conta.receberTransferencia(valor);
@@ -40,6 +50,7 @@ class Conta {
 
     verSaldo(){
         console.log("Conta: " + this.nome +" Saldo: R$" + this.saldo);
+        return this.saldo;
     }
 }
 
