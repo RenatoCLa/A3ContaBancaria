@@ -6,7 +6,7 @@ describe('Teste da classe pessoa', () =>{
     it('Deve apresentar corretamente as variáveis recebidas na sua criação', () =>{
         
     });
-    
+
     //Realizar deposito - fabio
     it('Deve retirar o valor do dinheiro da pessoa para o deposito', () =>{
         

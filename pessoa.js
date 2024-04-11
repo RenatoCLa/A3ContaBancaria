@@ -14,6 +14,7 @@ class Pessoa {
 
     verDinheiro(){
         console.log(this.nome + " tem R$" + this.dinheiro);
+        return this.dinheiro;
     }
 }
 
