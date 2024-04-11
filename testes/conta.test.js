@@ -8,8 +8,8 @@ describe('Testes da classe Conta', () =>{
         
     });
 
-    //Depositar um valor positivo a uma conta 
-    it('Deve depositar um valor positivo a outra conta', () =>{
+    //Depositar um valor positivo
+    it('Deve depositar um valor positivo', () =>{
         const pessoaTest = new Pessoa("nome", 50);
         const contaTest = new Conta(pessoaTest, 0);
 
@@ -31,7 +31,7 @@ describe('Testes da classe Conta', () =>{
 
     });
 
-    //Sacar um valor positivo - gusta
+    //Sacar um valor positivo
     it('Deve sacar um valor positivo do seu saldo', () =>{
         const pessoaTest = new Pessoa("nome", 0);
         const contaTest = new Conta(pessoaTest, 500);
