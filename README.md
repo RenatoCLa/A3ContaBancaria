@@ -1,4 +1,4 @@
-                                                                                                                   🏦 CONTA BANCÁRIA 🏦
+                                                                  🏦 CONTA BANCÁRIA 🏦
 
 
 O aplicativo de Conta Bancária tem como finalidade principal fornecer aos usuários uma ferramenta eficiente para gerenciamento de suas finanças pessoais. Através deste aplicativo, os usuários podem realizar diversas operações bancárias básicas, como depósito, saque e transferência de fundos, além de acompanhar o saldo atual e revisar o histórico de transações.
