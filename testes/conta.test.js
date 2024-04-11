@@ -72,27 +72,45 @@ describe('Testes de erro da classe Conta', () =>{
 
     //Depositar um valor negativo - dani
     it('Não deve permitir o deposito de um valor negativo', () =>{
-        
+        const pessoaTest = new Pessoa("nome", 25);
+        const contaTest = new Conta(pessoaTest, 0);
+
+        expect(() => contaTest.depositar(-250)).toThrowError('numero inválido');
     });
     
     //Depositar um valor 0 - dani
     it('Não deve permitir o deposito de 0', () =>{
-        
+        const pessoaTest = new Pessoa("nome", 100);
+        const contaTest = new Conta(pessoaTest, 0);
+
+        expect(() => contaTest.depositar(0)).toThrowError('numero inválido');
     });
 
     //Depositar um valor maior do que o seu limite - dani
     it('Não deve permitir o deposito de um valor acima do dinheiro que a pessoa tem em mãos', () =>{
+        const pessoaTest = new Pessoa("nome", 50);
+        const contaTest = new Conta(pessoaTest, 0);
+
+        expect(() => contaTest.depositar(100)).toThrowError('dinheiro insuficiente');
         
     });
 
     //Sacar um valor negativo - dani
     it('Não deve permitir sacar um valor negativo', () =>{
+        const pessoaTest = new Pessoa("nome", 0);
+        const contaTest = new Conta(pessoaTest, 50);
+
+        expect(() => contaTest.sacar(-50)).toThrowError('numero inválido');
+        
         
     });
 
     //Sacar um valor 0 - dani
     it('Não deve permitir sacar um valor 0', () =>{
-        
+        const pessoaTest = new Pessoa("nome", 0);
+        const contaTest = new Conta(pessoaTest, 500);
+
+        expect(() => contaTest.sacar(0)).toThrowError('numero inválido');
     });
 
     //Sacar um valor maior que o seu saldo - edu
