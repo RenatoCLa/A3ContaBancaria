@@ -97,26 +97,50 @@ describe('Testes de erro da classe Conta', () =>{
 
     //Sacar um valor maior que o seu saldo - edu
     it('Não deve permitir sacar um valor que excede o seu saldo', () =>{
-        
+        const pessoaTest = new Pessoa("nome", 0);
+        const contaTest = new Conta(pessoaTest, 500);
+
+        expect(() => contaTest.sacar(1000)).toThrowError('Você não possui saldo suficiente');
     });
 
     //Transferir para a sua propria conta - edu
     it('Não deve permitir a transferencia para a sua própria conta', () =>{
-        
+        const pessoaTest = new Pessoa("nome", 0);
+        const contaTest = new Conta(pessoaTest, 100);
+
+        expect(() => contaTest.transferir(100, contaTest)).toThrowError('transferencia para a própria conta não é permitido');
     });
 
     //Transferir um valor negativo - edu
     it('Não deve permitir a transferencia de um valor negativo', () =>{
-        
+        const pessoaTest = new Pessoa("nome", 0);
+        const contaTest = new Conta(pessoaTest, 50);
+
+        const pessoaTest2 = new Pessoa("nome2", 0);
+        const contaTest2 = new Conta(pessoaTest2, 0);
+
+        expect(() => contaTest.transferir(-10, contaTest2)).toThrowError('numero inválido'); 
     });
 
     //Transferir um valor 0 - edu
     it('Não deve permitir a transferencia de um valor 0', () =>{
-        
+        const pessoaTest = new Pessoa("nome", 0);
+        const contaTest = new Conta(pessoaTest, 50);
+
+        const pessoaTest2 = new Pessoa("nome2", 0);
+        const contaTest2 = new Conta(pessoaTest2, 0);
+
+        expect(() => contaTest.transferir(-10, contaTest2)).toThrowError('numero inválido');
     });
 
     //Transferir um valor maior que o seu saldo - edu
     it('Não deve permitir a transferencia de um valor que excede o seu saldo', () =>{
-        
+        const pessoaTest = new Pessoa("nome", 0);
+        const contaTest = new Conta(pessoaTest, 25);
+
+        const pessoaTest2 = new Pessoa("nome2", 0);
+        const contaTest2 = new Conta(pessoaTest2, 0);
+
+        expect(() => contaTest.transferir(58, contaTest2)).toThrowError('saldo insuficiente');
     });
 });
