@@ -47,7 +47,7 @@ class Conta {
             conta.receberTransferencia(valor);
         }else{
             console.log("Saldo insuficiente.");
-            throw new Error('numero inválido');
+            throw new Error('saldo insuficiente');
         }
     }
 
