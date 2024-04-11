@@ -1,4 +1,4 @@
-const Pessoa = require("pessoa.js");
+const Pessoa = require("../pessoa.js");
 
 describe('Teste da classe pessoa', () =>{
 

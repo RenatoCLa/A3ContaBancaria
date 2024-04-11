@@ -1,11 +1,11 @@
-const Conta = require("conta.js");
-const Pessoa = require("pessoa.js");
+const Conta = require("../conta.js");
+const Pessoa = require("../pessoa.js");
 
 describe('Testes da classe Conta', () =>{
     
     //Variáveis da classe conta na inicialização - fabio
     it('', () =>{
-        
+
     });
 
     //Depositar um valor positivo a uma conta - gusta
