@@ -3,32 +3,32 @@ const Pessoa = require("pessoa.js");
 
 describe('Testes da classe Conta', () =>{
     
-    //Variáveis da classe conta na inicialização
+    //Variáveis da classe conta na inicialização - fabio
     it('', () =>{
         
     });
 
-    //Depositar um valor positivo a uma conta
+    //Depositar um valor positivo a uma conta - gusta
     it('', () =>{
         
     });
 
-    //Receber transferencia
+    //Receber transferencia - gusta
     it('', () =>{
         
     });
 
-    //Sacar um valor positivo
+    //Sacar um valor positivo - gusta
     it('', () =>{
         
     });
 
-    //Transferir um valor positivo a uma conta
+    //Transferir um valor positivo a uma conta - gusta
     it('', () =>{
         
     });
 
-    //Ver o saldo da conta
+    //Ver o saldo da conta - gusta
     it('', () =>{
         
     });
@@ -36,52 +36,52 @@ describe('Testes da classe Conta', () =>{
 
 describe('Testes de erro da classe Conta', () =>{
 
-    //Depositar um valor negativo
+    //Depositar um valor negativo - dani
     it('', () =>{
         
     });
     
-    //Depositar um valor 0
+    //Depositar um valor 0 - dani
     it('', () =>{
         
     });
 
-    //Depositar um valor maior do que o seu limite
+    //Depositar um valor maior do que o seu limite - dani
     it('', () =>{
         
     });
 
-    //Sacar um valor negativo
+    //Sacar um valor negativo - dani
     it('', () =>{
         
     });
 
-    //Sacar um valor 0
+    //Sacar um valor 0 - dani
     it('', () =>{
         
     });
 
-    //Sacar um valor maior que o seu saldo
+    //Sacar um valor maior que o seu saldo - edu
     it('', () =>{
         
     });
 
-    //Transferir para a sua propria conta
+    //Transferir para a sua propria conta - edu
     it('', () =>{
         
     });
 
-    //Transferir um valor negativo
+    //Transferir um valor negativo - edu
     it('', () =>{
         
     });
 
-    //Transferir um valor 0
+    //Transferir um valor 0 - edu
     it('', () =>{
         
     });
 
-    //Transferir um valor maior que o seu saldo
+    //Transferir um valor maior que o seu saldo - edu
     it('', () =>{
         
     });

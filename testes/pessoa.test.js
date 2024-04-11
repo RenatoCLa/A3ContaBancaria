@@ -2,22 +2,22 @@ const Pessoa = require("pessoa.js");
 
 describe('Teste da classe pessoa', () =>{
 
-    //Variáveis da classe presentes na inicialização
+    //Variáveis da classe presentes na inicialização - fabio
     it('', () =>{
         
     });
     
-    //Realizar deposito
+    //Realizar deposito - fabio
     it('', () =>{
         
     });
 
-    //Receber
+    //Receber - fabio
     it('', () =>{
         
     });
 
-    //Ver dinheiro
+    //Ver dinheiro - fabio
     it('', () =>{
         
     });
