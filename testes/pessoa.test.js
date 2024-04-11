@@ -8,7 +8,7 @@ describe('Teste da classe pessoa', () =>{
     });
     
     //Realizar deposito - fabio
-    it('Deve realizar o deposito para sua conta', () =>{
+    it('Deve retirar o valor do dinheiro da pessoa para o deposito', () =>{
         
     });
 
