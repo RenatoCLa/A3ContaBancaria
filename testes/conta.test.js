@@ -8,28 +8,62 @@ describe('Testes da classe Conta', () =>{
         
     });
 
-    //Depositar um valor positivo a uma conta - gusta
+    //Depositar um valor positivo a uma conta 
     it('Deve depositar um valor positivo a outra conta', () =>{
-        
+        const pessoaTest = new Pessoa("nome", 50);
+        const contaTest = new Conta(pessoaTest, 0);
+
+        contaTest.depositar(50);
+
+        expect(contaTest.saldo).toBe(50);
+        expect(pessoaTest.dinheiro).toBe(0);
+      
     });
 
-    //Receber transferencia - gusta
+    //Receber transferencia 
     it('Deve receber um valor e adiciona-lo ao saldo', () =>{
-        
+        const pessoaTest = new Pessoa("nome", 50);
+        const contaTest = new Conta(pessoaTest, 0);
+
+        contaTest.receberTransferencia(500);
+
+        expect(contaTest.saldo).toBe(500);
+
     });
 
     //Sacar um valor positivo - gusta
     it('Deve sacar um valor positivo do seu saldo', () =>{
+        const pessoaTest = new Pessoa("nome", 0);
+        const contaTest = new Conta(pessoaTest, 500);
+
+        contaTest.sacar(250);
+        expect(contaTest.saldo).toBe(250);
+        expect(pessoaTest.dinheiro).toBe(250);
         
     });
 
-    //Transferir um valor positivo a uma conta - gusta
+    //Transferir um valor positivo a uma conta 
     it('Deve transferir um valor positivo a outra conta', () =>{
+        const pessoaTest = new Pessoa("Nome", 0);
+        const contaTest = new Conta(pessoaTest, 50);
+
+        const pessoaTest2 = new Pessoa("Nome2", 0);
+        const contaTest2 = new Conta(pessoaTest2, 0);
+
+        contaTest.transferir(50, contaTest2);
+
+        expect(contaTest.saldo).toBe(0);
+        expect(contaTest2.saldo).toBe(50);
+
         
     });
 
-    //Ver o saldo da conta - gusta
+    //Ver o saldo da conta 
     it('Deve mostrar corretamente o saldo da conta', () =>{
+        const pessoaTest = new Pessoa("nome", 0);
+        const contaTest = new Conta(pessoaTest, 500);
+
+        expect(contaTest.verSaldo()).toBe(500);
         
     });
 });
