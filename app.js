@@ -1,19 +1,24 @@
-const Conta = require("./conta.js");
-const Pessoa = require("./pessoa.js");
+const Conta = require("./conta");
 
-const Fabiano = new Pessoa("Fabiano", 50000);
-const FabConta = new Conta(Fabiano, 0);
+//Solução temporária para a criação de IDs de conta
+const conta01 = new Conta("joao", (Math.random() * 100000000).toFixed(0), 1012123109, 10);
 
-const Gustavo = new Pessoa("Gustavo", 25);
-const GuConta = new Conta(Gustavo, 0);
+const conta02 = new Conta("jorge", (Math.random() * 100000000).toFixed(0), 23210321321, 0);
 
-FabConta.depositar(5000);
-FabConta.transferir(20, GuConta);
+conta01.verSaldo();
 
-FabConta.verSaldo();
-Fabiano.verDinheiro();
-GuConta.verSaldo();
-Gustavo.verDinheiro();
+conta01.sacar(4);
 
-console.log(FabConta);
-console.log(GuConta);
+conta01.verSaldo();
+
+conta01.depositar(5);
+
+conta01.verSaldo();
+
+conta02.verSaldo();
+
+conta01.transferir(10, conta02);
+
+conta01.verSaldo();
+
+conta02.verSaldo();

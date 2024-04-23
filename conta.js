@@ -1,9 +1,49 @@
 class Conta {
-    constructor(pessoa, saldo){
-        this.nome = pessoa.nome;
+
+    constructor(nome, ID, cpf, saldo){
+        this.nome = nome;
         this.saldo = saldo;
-        this.pessoa = pessoa;
+        this.cpf = cpf;
+        this.ID = ID;
     }
+
+    /* Esperar a criação do banco de dados para implementar essa função
+    gerarID(){
+
+    }
+    */
+
+    //Notas | Todo
+
+    //Converter os valores imprimidos para valores monetarios; ex: 4 => 04,00
+    //Implementar a mudança do saldo da conta no banco de dados em todas as funções
+
+    sacar(valor){
+        this.saldo -= valor;
+        console.log("Conta " + this.ID + " sacou : R$" + valor + "\n");
+    }
+
+    depositar(valor){
+        this.saldo += valor;
+        console.log("Conta " + this.ID + " depositou : R$" + valor + "\n");
+    }
+
+    transferir(valor, conta){
+        this.saldo -= valor;
+        console.log("Realizado transferência de R$ " + valor + " da conta " + this.ID + " para a conta " + conta.ID + "\n");
+        conta.receberTransferencia(valor);
+    }
+
+    receberTransferencia(valor){
+        this.saldo += valor;
+        console.log("Conta " + this.ID + " recebeu transferência de R$" + valor + "\n");
+    }
+
+    verSaldo(){
+        console.log("O saldo da conta " + this.ID + " é : R$" + this.saldo + "\n");
+    }
+
+    /*
 
     depositar(deposito){
         if(deposito <= 0){
@@ -55,6 +95,8 @@ class Conta {
         console.log("Conta: " + this.nome +" Saldo: R$" + this.saldo);
         return this.saldo;
     }
+
+    */
 }
 
 module.exports = Conta;

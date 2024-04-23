@@ -1,3 +1,4 @@
+//Não é necessário o uso dessa classe para o sistema, remover ela futuramente
 class Pessoa {
     constructor(nome, dinheiro){
         this.nome = nome;
