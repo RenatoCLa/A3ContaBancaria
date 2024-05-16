@@ -4,15 +4,10 @@ const Conta = require('./conta');
 
 app.use(express.json());
 
-//CRUD
-
-//CREATE (feito)
-//READ (feito)
-//UPDATE (feito)
-//DELETE
-
 //array para armazenamento de contas, enquanto o banco de dados não é implementado
 let contas = [];
+
+let bancos = [];
 
 //pagina inicial
 app.get('/', (req, res) => {
@@ -51,6 +46,18 @@ app.delete('/conta/:id', (req, res) =>{
     else{
         res.status(404).send('Conta não foi encontrada');
     }
+});
+
+//realizar deposito em uma conta
+app.put('/conta/:id/:dep', (req, res) =>{
+    const conta = contas.at(parseInt(req.params.id));
+    conta.depositar(parseFloat(req.params.dep));
+    res.send();
+});
+
+app.put('/conta/:id/:sac', (req, res) =>{
+    const conta = contas.at(parseInt(req.params.id));
+    conta.sacar(parseFloat(req.params.sac));
 });
 
 //inicia o servidor na porta 3000

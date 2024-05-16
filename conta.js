@@ -86,6 +86,8 @@ class Conta {
 
     verSaldo(){
         console.log("O saldo da conta " + this.id + " é : R$" + this.saldo + "\n");
+        return toString(this.saldo);
+        
     }
 }
 
