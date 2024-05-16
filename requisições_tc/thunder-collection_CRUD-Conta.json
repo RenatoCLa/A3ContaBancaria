@@ -1,0 +1,69 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "CRUD-Conta",
+    "collectionId": "f62d6b95-4a63-4d49-bef5-e4cd025bb1c6",
+    "dateExported": "2024-05-16T14:33:21.729Z",
+    "version": "1.2",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "16ed3b03-a418-4251-89c7-ab65c8cbdb8b",
+            "colId": "f62d6b95-4a63-4d49-bef5-e4cd025bb1c6",
+            "containerId": "",
+            "name": "CREATE",
+            "url": "localhost:3000/conta",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-05-16T14:06:26.085Z",
+            "modified": "2024-05-16T14:20:28.992Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"cpf\": 7772222,\n  \"nome\": \"clara\",\n  \"saldo\": 91,\n  \"id_banco\": 1\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "1151732d-b4ef-463b-8b75-02d103e69494",
+            "colId": "f62d6b95-4a63-4d49-bef5-e4cd025bb1c6",
+            "containerId": "",
+            "name": "READ",
+            "url": "localhost:3000/conta",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-05-16T14:06:26.086Z",
+            "modified": "2024-05-16T14:06:26.086Z",
+            "headers": []
+        },
+        {
+            "_id": "59a5ef5a-9201-437b-b8f0-e1ca57f013af",
+            "colId": "f62d6b95-4a63-4d49-bef5-e4cd025bb1c6",
+            "containerId": "",
+            "name": "UPDATE",
+            "url": "localhost:3000/conta/1:id",
+            "method": "PUT",
+            "sortNum": 30000,
+            "created": "2024-05-16T14:06:26.087Z",
+            "modified": "2024-05-16T14:06:26.087Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"cpf\": 1000034,\n  \"nome\": \"cleber\",\n  \"saldo\": 0.25\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "d1a756c5-fc83-4617-adff-1566169bd938",
+            "colId": "f62d6b95-4a63-4d49-bef5-e4cd025bb1c6",
+            "containerId": "",
+            "name": "DELETE",
+            "url": "localhost:3000/conta/1:id_c/1:id_b",
+            "method": "DELETE",
+            "sortNum": 40000,
+            "created": "2024-05-16T14:06:26.088Z",
+            "modified": "2024-05-16T14:31:06.850Z",
+            "headers": []
+        }
+    ],
+    "ref": "dG4nohC5jjOZ1rx5yP94HZYd1uHO5RjNVjxd2xD8hibzjrtnKUSS8RYxyxf6Cyx963qfCaPVumgszvEKpTTzMA"
+}

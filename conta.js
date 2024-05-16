@@ -1,10 +1,11 @@
 class Conta {
 
-    constructor(id, cpf, nome, saldo){
+    constructor(id, cpf, nome, saldo, banco){
         this.nome = nome;
         this.saldo = saldo;
         this.cpf = cpf;
         this.id = id;
+        this.banco = banco;
     }
 
     //Converter os valores imprimidos para valores monetarios; ex: 4 => 04,00
@@ -18,14 +19,17 @@ class Conta {
             id: conta.id,
             cpf: conta.cpf,
             nome: conta.nome,
-            saldo: conta.saldo
+            saldo: conta.saldo,
+            banco: conta.banco
         }
     }
 
     //função statica para criar uma conta bancária
-    static create(contas, data){
-        const createdConta = new Conta(contas.length +1, data.cpf, data.nome, data.saldo);
+    static create(contas, bancos, data){
+        const banco = bancos.find(banco => banco.id === data.id_banco);
+        const createdConta = new Conta(contas.length +1, data.cpf, data.nome, data.saldo, banco.id);
         contas.push(createdConta);
+        banco.associarConta(createdConta);
         return this.returnConta(createdConta);
     }
 
@@ -35,13 +39,13 @@ class Conta {
     }
 
     //retorna a busca de uma conta, baseada em seu id
-    static buscarPorid(contas, id){
+    static buscarPorID(contas, id){
         return contas.find(conta => conta.id === id);
     };
 
     //atualiza as informações de uma conta
     static update(contas, id, data){
-        const conta = this.buscarPorid(contas, id);
+        const conta = this.buscarPorID(contas, id);
         if (conta) {
             conta.cpf = data.cpf || conta.cpf;
             conta.nome = data.nome || conta.nome;
@@ -51,10 +55,13 @@ class Conta {
     };
 
     //deleta uma conta
-    static delete(contas, id){
-        const deletarConta = this.buscarPorid(contas, id);
+    static delete(contas, bancos, id_c, id_b){
+        const deletarConta = this.buscarPorID(contas, id_c);
         if (deletarConta) {
             const index = contas.indexOf(deletarConta);
+            const banco = bancos.find(banco => banco.id === id_b);
+            const index_c = banco.contas.indexOf(deletarConta);
+            banco.contas.splice(index_c, 1);
             contas.splice(index, 1);
             return true;
         }
@@ -86,8 +93,6 @@ class Conta {
 
     verSaldo(){
         console.log("O saldo da conta " + this.id + " é : R$" + this.saldo + "\n");
-        return toString(this.saldo);
-        
     }
 }
 
