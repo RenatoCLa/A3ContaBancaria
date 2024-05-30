@@ -67,7 +67,10 @@ class Banco{
     associarConta(conta){
         this.contas.push(conta);
     }
-    
+
+    // adicionar transferência de conta
+    // para outro banco
+    // transferirConta(conta, banco)
 }
 
 module.exports = Banco;
