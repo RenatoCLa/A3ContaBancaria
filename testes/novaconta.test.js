@@ -87,4 +87,39 @@ describe('Testes de erro de Conta', () =>{
         expect(() => conta.transferir(10, conta2)).toThrowError('Saldo insuficiente');
     });
 
+    it('Não deve realizar um saque que exceda o saldo', () =>{
+        const banco = new Banco("Bradesco", 1);
+        const conta = new Conta(1, 100231, "Caio", 99, banco.id);
+
+        expect(() => conta.sacar(100)).toThrowError('Valor invalido');
+    });
+    
+    it('Não deve realizar um saque de valor 0', () =>{
+        const banco = new Banco("Bradesco", 1);
+        const conta = new Conta(1, 100231, "Caio", 5, banco.id);
+
+        expect(() => conta.sacar(0)).toThrowError('Valor invalido');
+    });
+
+    it('Não deve realizar um deposito de valor 0', () =>{
+        const banco = new Banco("Bradesco", 1);
+        const conta = new Conta(1, 100231, "Caio", 5, banco.id);
+
+        expect(() => conta.depositar(0)).toThrowError('Valor invalido');
+    });
+
+    it('Não deve realizar um saque de um valor negativo', () =>{
+        const banco = new Banco("Bradesco", 1);
+        const conta = new Conta(1, 100231, "Caio", 5, banco.id);
+
+        expect(() => conta.sacar(-2)).toThrowError('Valor invalido');
+    });
+
+    it('Não deve realizar um deposito de um valor negativo', () =>{
+        const banco = new Banco("Bradesco", 1);
+        const conta = new Conta(1, 100231, "Caio", 5, banco.id);
+
+        expect(() => conta.depositar(-2)).toThrowError('Valor invalido');
+    });
+
 });

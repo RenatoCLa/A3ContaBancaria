@@ -76,7 +76,7 @@ class Conta {
             console.log("Conta " + this.id + " sacou : R$" + valor + "\n");
         }
         else{
-            throw new error("Valor inválido");
+            throw new Error("Valor invalido");
         }
     }
 
@@ -84,6 +84,8 @@ class Conta {
         if(valor > 0.0){
             this.saldo += valor;
         console.log("Conta " + this.id + " depositou : R$" + valor + "\n");
+        }else{
+            throw new Error('Valor invalido');
         }
     }
 
