@@ -71,16 +71,32 @@ class Conta {
     //funções
 
     sacar(valor){
-        this.saldo -= valor;
-        console.log("Conta " + this.id + " sacou : R$" + valor + "\n");
+        if(valor > 0.0 && valor <= this.saldo){
+            this.saldo -= valor;
+            console.log("Conta " + this.id + " sacou : R$" + valor + "\n");
+        }
+        else{
+            throw new error("Valor inválido");
+        }
     }
 
     depositar(valor){
-        this.saldo += valor;
+        if(valor > 0.0){
+            this.saldo += valor;
         console.log("Conta " + this.id + " depositou : R$" + valor + "\n");
+        }
     }
 
     transferir(valor, conta){
+        if(valor === 0){
+            throw new Error('Valor invalido');
+        }
+        if(valor > this.saldo){
+            throw new Error('Saldo insuficiente');
+        }
+        if(conta === this || !conta){
+            throw new Error('Conta invalida');
+        }
         this.saldo -= valor;
         console.log("Realizado transferência de R$ " + valor + " da conta " + this.id + " para a conta " + conta.id + "\n");
         conta.receberTransferencia(valor);
@@ -93,6 +109,7 @@ class Conta {
 
     verSaldo(){
         console.log("O saldo da conta " + this.id + " é : R$" + this.saldo + "\n");
+        return this.saldo;
     }
 }
 

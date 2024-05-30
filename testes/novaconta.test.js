@@ -40,4 +40,51 @@ describe('Testes de Conta', () =>{
         expect(conta.saldo).toBe(10);
     });
 
+    it('Deve transferir um valor a uma conta', () =>{
+        const banco = new Banco("Bradesco", 1);
+        const conta = new Conta(1, 100231, "Caio", 50, banco.id);
+        const conta2 = new Conta(2, 321296, "Fabio", 0, banco.id);
+
+        conta.transferir(30, conta2);
+
+        expect(conta.saldo).toBe(20);
+        expect(conta2.saldo).toBe(30);
+    });
+
+    it('Deve exibir corretamente o saldo da conta', () =>{
+        const banco = new Banco("Bradesco", 1);
+        const conta = new Conta(1, 100231, "Caio", 0, banco.id);
+
+        expect(conta.verSaldo()).toBe(0);
+
+        conta.depositar(125.31);
+
+        expect(conta.verSaldo()).toBe(125.31);
+    });
+});
+
+describe('Testes de erro de Conta', () =>{
+
+    it('Não deve realizar uma transferência sem uma conta de destino', ()=>{
+        const banco = new Banco("Bradesco", 1);
+        const conta = new Conta(1, 100231, "Caio", 10, banco.id);
+
+        expect(() => conta.transferir(10, undefined)).toThrowError('Conta invalida');
+    });
+
+    it('Não deve realizar uma transferência para a sua própria conta', () =>{
+        const banco = new Banco("Bradesco", 1);
+        const conta = new Conta(1, 100231, "Caio", 10, banco.id);
+
+        expect(() => conta.transferir(10, conta)).toThrowError('Conta invalida');
+    });
+
+    it('Não deve realizar uma transferência com um valor maior que o de seu saldo', () =>{
+        const banco = new Banco("Bradesco", 1);
+        const conta = new Conta(1, 100231, "Caio", 5, banco.id);
+        const conta2 = new Conta(2, 298321, "Fernando", 0, banco.id);
+
+        expect(() => conta.transferir(10, conta2)).toThrowError('Saldo insuficiente');
+    });
+
 });
