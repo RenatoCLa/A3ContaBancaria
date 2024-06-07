@@ -1,7 +1,10 @@
 const Banco = require('../Models/banco');
 const Conta = require('../Models/conta');
 
-let bancos = [];
+global.bancos = [];
+/*variavel temporária para funcionar como um banco de dados, e que pode ser usada por ambos os
+arquivos "controller"
+*/
 
 const criarBanco = (req, res) => {
     const {nome} = req.body;
@@ -18,7 +21,7 @@ const deletarBanco = (req, res) => {
     const { bancoId } = req.params;
     try {
         Banco.deleteBanco(bancos, bancoId);
-        res.status(201).send({ message: 'Banco deletado com sucesso!'});
+        res.status(204).send();
     } catch (error) {
         res.status(400).send({ message: error.message });
     }

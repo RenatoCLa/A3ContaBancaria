@@ -69,7 +69,6 @@ class Banco{
         const conta = this.contas.find(c => c.id == id);
         return conta;
     }
-
 }
 
 module.exports = Banco;
