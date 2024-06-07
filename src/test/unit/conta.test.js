@@ -1,11 +1,11 @@
-const Conta = require('../conta.js');
-const Banco = require('../banco.js');
+const Conta = require('../../Models/conta.js');
+const Banco = require('../../Models/banco.js');
 
 describe('Testes de Conta', () =>{
 
     it('Deve apresentar as variáveis certas quando criado', () =>{
         const banco = new Banco("Bradesco", 1);
-        const conta = new Conta(1, 100231, "Caio", 100, banco.id);
+        const conta = new Conta(100231, "Caio", 100, banco.id);
         banco.contas.push(conta);
 
         expect(typeof conta).toBe('object');
@@ -15,16 +15,16 @@ describe('Testes de Conta', () =>{
         expect(conta.cpf).toBe(100231);
         expect(conta.id).toBe(1);
 
-        expect(typeof conta.banco).toBe('number');
+        expect(typeof conta.bancoId).toBe('number');
 
-        expect(conta.banco).toBe(banco.id);
+        expect(conta.bancoId).toBe(banco.id);
         
         expect(banco.contas).toContain(conta);
     });
 
     it('Deve depositar um valor positivo', () =>{
         const banco = new Banco("Bradesco", 1);
-        const conta = new Conta(1, 100231, "Caio", 0, banco.id);
+        const conta = new Conta(100231, "Caio", 0, banco.id);
 
         conta.depositar(100);
 
@@ -33,7 +33,7 @@ describe('Testes de Conta', () =>{
 
     it('Deve sacar um valor positivo', () =>{
         const banco = new Banco("Bradesco", 1);
-        const conta = new Conta(1, 100231, "Caio", 50, banco.id);
+        const conta = new Conta(100231, "Caio", 50, banco.id);
 
         conta.sacar(40);
 
@@ -42,8 +42,8 @@ describe('Testes de Conta', () =>{
 
     it('Deve transferir um valor a uma conta', () =>{
         const banco = new Banco("Bradesco", 1);
-        const conta = new Conta(1, 100231, "Caio", 50, banco.id);
-        const conta2 = new Conta(2, 321296, "Fabio", 0, banco.id);
+        const conta = new Conta(100231, "Caio", 50, banco.id);
+        const conta2 = new Conta(321296, "Fabio", 0, banco.id);
 
         conta.transferir(30, conta2);
 
@@ -53,7 +53,7 @@ describe('Testes de Conta', () =>{
 
     it('Deve exibir corretamente o saldo da conta', () =>{
         const banco = new Banco("Bradesco", 1);
-        const conta = new Conta(1, 100231, "Caio", 0, banco.id);
+        const conta = new Conta(100231, "Caio", 0, banco.id);
 
         expect(conta.verSaldo()).toBe(0);
 
@@ -81,8 +81,8 @@ describe('Testes de erro de Conta', () =>{
 
     it('Não deve realizar uma transferência com um valor maior que o de seu saldo', () =>{
         const banco = new Banco("Bradesco", 1);
-        const conta = new Conta(1, 100231, "Caio", 5, banco.id);
-        const conta2 = new Conta(2, 298321, "Fernando", 0, banco.id);
+        const conta = new Conta(100231, "Caio", 5, banco.id);
+        const conta2 = new Conta(298321, "Fernando", 0, banco.id);
 
         expect(() => conta.transferir(10, conta2)).toThrowError('Saldo insuficiente');
     });

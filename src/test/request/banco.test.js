@@ -12,7 +12,6 @@ describe('API Tests - Banco', () => {
         expect(response.status).toBe(201);
         expect(response.body.message).toBe('Banco criado com sucesso!');
         expect(response.body.banco.nome).toBe('Santander');
-        bancoId = response.body.banco.id;
     });
 
     test('Deletar um banco', async () => {
@@ -38,7 +37,7 @@ describe('API Tests - Banco', () => {
         expect(response.body.length).toBeGreaterThan(0);
     });
 
-    test('Busca ID', async () => {
+    test('Buscar Banco Por ID', async () => {
         await request(app).post('/bancos')
         .send({
             nome: 'Bradesco'
@@ -60,4 +59,65 @@ describe('API Tests - Banco', () => {
         expect(response.body.nome).toBe('Caixa');
     });
 
+    test('Criar conta', async () => {
+        const response = await request(app).post('/2/contas')
+        .send({
+            cpf: 254343423,
+            nome: 'Amélia',
+            saldo: 921
+        });
+
+        expect(response.status).toBe(200);
+        expect(response.body.bancoId).toBe('2');
+        expect(response.body.id).toBe(1);
+        expect(response.body.cpf).toBe(254343423);
+        expect(response.body.nome).toBe('Amélia');
+        expect(response.body.saldo).toBe(921);
+    });
+
+    test('Listar Conta', async () => {
+        await request(app).post('/2/contas').send({
+            cpf: 3333322,
+            nome: "Fernando",
+            saldo: 5032
+        });
+
+        const response = await request(app).get('/2/contas');
+
+        expect(response.status).toBe(200);
+        expect(Array.isArray(response.body.contas)).toBe(true);
+        expect(response.body.contas.length).toBeGreaterThan(1);
+    });
+
+    test('Buscar Conta Por ID', async () => {
+        const response = await request(app).get('/2/contas/2');
+
+        expect(response.status).toBe(200);
+        expect(response.body.id).toBe(2);
+        expect(response.body.nome).toBe('Fernando');
+        expect(response.body.saldo).toBe(5032);
+        expect(response.body.cpf).toBe(3333322);
+    });
+
+    test('Atualizar Conta', async () => {
+        const response = await request(app).put('/2/contas/2')
+        .send({
+            nome: "Fátima",
+            saldo: 400,
+            cpf: 213123
+        });
+        
+        expect(response.status).toBe(200);
+        expect(response.body.message).toBe('Conta atualizada com sucesso!');
+        expect(response.body.conta.id).toBe(2);
+        expect(response.body.conta.nome).toBe('Fátima');
+        expect(response.body.conta.saldo).toBe(400);
+        expect(response.body.conta.cpf).toBe(213123);
+    });
+
+    test('Deletar Conta', async () => {
+        const response = await request(app).delete('/2/contas/2');
+
+        expect(response.status).toBe(204);
+    });
 });
