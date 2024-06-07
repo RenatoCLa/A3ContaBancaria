@@ -2,12 +2,12 @@ class Conta {
 
     static currentId = 1;
 
-    constructor(id, cpf, nome, saldo, banco){
+    constructor(cpf, nome, saldo, bancoId){
         this.nome = nome;
         this.saldo = saldo;
         this.cpf = cpf;
         this.id = Conta.currentId++;
-        this.banco = banco;
+        this.bancoId = bancoId;
     }
 
     //Converter os valores imprimidos para valores monetarios; ex: 4 => 04,00
@@ -22,14 +22,14 @@ class Conta {
             cpf: conta.cpf,
             nome: conta.nome,
             saldo: conta.saldo,
-            banco: conta.banco
+            bancoId: conta.bancoId
         }
     }
 
     //função statica para criar uma conta bancária
     static create(contas, bancos, data){
         const banco = bancos.find(banco => banco.id === data.id_banco);
-        const createdConta = new Conta(contas.length +1, data.cpf, data.nome, data.saldo, banco.id);
+        const createdConta = new Conta(data.cpf, data.nome, data.saldo, banco.id);
         contas.push(createdConta);
         banco.associarConta(createdConta);
         return this.returnConta(createdConta);
@@ -41,13 +41,12 @@ class Conta {
     }
 
     //retorna a busca de uma conta, baseada em seu id
-    static listarPorID(contas, id){
+    static buscarPorId(contas, id){
         return contas.find(conta => conta.id === id);
     };
 
     //atualiza as informações de uma conta
-    static update(contas, id, data){
-        const conta = this.buscarPorID(contas, id);
+    static update(conta, data){
         if (conta) {
             conta.cpf = data.cpf || conta.cpf;
             conta.nome = data.nome || conta.nome;
@@ -58,7 +57,7 @@ class Conta {
 
     //deleta uma conta
     static delete(contas, bancos, id_c, id_b){
-        const deletarConta = this.buscarPorID(contas, id_c);
+        const deletarConta = this.buscarPorId(contas, id_c);
         if (deletarConta) {
             const index = contas.indexOf(deletarConta);
             const banco = bancos.find(banco => banco.id === id_b);

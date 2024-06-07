@@ -59,9 +59,17 @@ class Banco{
         this.contas.push(conta);
     }
 
-    // adicionar transferência de conta
-    // para outro banco
-    // transferirConta(conta, banco)
+    listarContas(){
+        return {
+            contas: this.contas
+        }
+    }
+
+    buscarConta(id){
+        const conta = this.contas.find(c => c.id == id);
+        return conta;
+    }
+
 }
 
 module.exports = Banco;
