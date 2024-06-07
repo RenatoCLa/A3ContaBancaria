@@ -1,7 +1,10 @@
 class Banco{
-    constructor(nome, id){
+
+    static currentId = 1;
+
+    constructor(nome){
         this.nome = nome;
-        this.id = id;
+        this.id = Banco.currentId++;
         this.contas = [];
     }
 
@@ -23,17 +26,17 @@ class Banco{
     }
 
     //READ
-    static verTodosBancos(bancos){
+    static listarBancos(bancos){
         return bancos.map(banco => this.returnBanco(banco));
     }
 
-    static buscarPorID(bancos, id){
-        return bancos.find(banco => banco.id === id);
+    static buscarPorId(bancos, id){
+        return bancos.find(banco => banco.id == id);
     }
 
     //UPDATE
     static update(bancos, id, data){
-        const banco = this.buscarPorID(bancos, id);
+        const banco = this.buscarPorId(bancos, id);
         if (banco){
             banco.nome = data.nome || banco.nome;
         }
@@ -41,24 +44,12 @@ class Banco{
     }
 
     //DELETE
-    static delete(bancos, id){
-        const banco = this.buscarPorID(bancos, id);
+    static deleteBanco(bancos, id){
+        const banco = this.buscarPorId(bancos, id);
+        console.log(banco);
         if (banco){
             const index = bancos.indexOf(banco);
             bancos.splice(index, 1);
-            return true;
-        }
-        return false;
-    }
-
-    static deleteConta(bancos, contas, id_banco, id_conta){
-        const banco = this.buscarPorID(bancos, id_banco);
-        if (banco){
-            const conta = banco.contas.find(conta => conta.id === id_conta);
-            const index = banco.contas.indexOf(conta);
-            banco.contas.splice(index, 1);
-            const index_c = contas.indexOf(conta);
-            contas.splice(index_c, 1);
             return true;
         }
         return false;

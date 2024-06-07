@@ -1,10 +1,12 @@
 class Conta {
 
+    static currentId = 1;
+
     constructor(id, cpf, nome, saldo, banco){
         this.nome = nome;
         this.saldo = saldo;
         this.cpf = cpf;
-        this.id = id;
+        this.id = Conta.currentId++;
         this.banco = banco;
     }
 
@@ -34,12 +36,12 @@ class Conta {
     }
 
     //retorna todas as contas presentes no sistema
-    static verTodasContas(contas){
+    static listarContas(contas){
         return contas.map(conta => this.returnConta(conta));
     }
 
     //retorna a busca de uma conta, baseada em seu id
-    static buscarPorID(contas, id){
+    static listarPorID(contas, id){
         return contas.find(conta => conta.id === id);
     };
 
