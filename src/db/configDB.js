@@ -7,7 +7,7 @@ const db = new sqlite3.Database('conta_bancaria.db', (err) => {
     else{
         db.get("PRAGMA foreign_keys = ON");
         
-        db.run(`CREATE TABLE IF NOT EXISTS banco (id INTEGER PRIMARY KEY AUTOINCREMENT,
+        db.run(`CREATE TABLE IF NOT EXISTS banco (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
             nome TEXT NOT NULL)`,
             (err) => {
             if(err){

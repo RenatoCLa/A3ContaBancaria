@@ -1,10 +1,15 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const ContaController = require('../Controllers/contaController');
+import ContaController from '../controllers/contaController.js';
 
-router.put('/saque/:bancoId/:contaId', ContaController.sacar);
-router.put('/deposito/:bancoId/:contaId', ContaController.depositar);
-router.put('/:bancoId/transferir/:contaId/:subContaId', ContaController.transferir);
-router.get('/saldo/:bancoId/:contaId', ContaController.verSaldo);
+router.get('/contas', ContaController.listarContas);
+router.get('/contas/:id', ContaController.listarConta);
+router.post('/contas', ContaController.criarConta);
+router.put('/contas/:id', ContaController.atualizarConta);
+router.delete('/contas/:id', ContaController.deletarConta);
+router.put('/contas/saque/:id', ContaController.sacar);
+router.put('/contas/deposito/:id', ContaController.depositar);
+router.put('/contas/transferir/:id/:id_trgt', ContaController.transferir);
+router.get('/contas/saldo/:id', ContaController.verSaldo);
 
-module.exports = router;
+export default router;

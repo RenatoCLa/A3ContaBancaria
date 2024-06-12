@@ -1,59 +1,5 @@
-const Banco = require('../Models/banco');
-const Conta = require('../Models/conta');
-
-global.bancos = [];
-/*variavel temporária para funcionar como um banco de dados, e que pode ser usada por ambos os
-arquivos "controller"
-*/
-
-const criarBanco = (req, res) => {
-    const {nome} = req.body;
-    try {
-        const banco = new Banco(nome);
-        bancos.push(banco);
-        res.status(201).send({message: 'Banco criado com sucesso!', banco});
-    } catch (error) {
-        res.status(400).send({ message: error.message });
-    }
-};
-
-const deletarBanco = (req, res) => {
-    const { bancoId } = req.params;
-    try {
-        Banco.deleteBanco(bancos, bancoId);
-        res.status(204).send();
-    } catch (error) {
-        res.status(400).send({ message: error.message });
-    }
-}
-
-const listarBancos = (req, res) => {
-    try {
-        res.status(200).send(bancos);
-    } catch (error) {
-        res.status(400).send({ message: error.message });
-    }
-}
-
-const buscarPorIdBanco = (req, res) => {
-    const { bancoId } = req.params;
-    try {
-        const banco = Banco.buscarPorId(bancos, bancoId);
-        res.status(200).send(banco);
-    } catch (error) {
-        res.status(400).send({ message: error.message });
-    }
-}
-
-const atualizarBanco = (req, res) => {
-    const { bancoId } = req.params;
-    try {
-        const banco = Banco.update(bancos, bancoId, req.body);
-        res.status(200).send(banco);
-    } catch (error) {
-        res.status(400).send({ message: error.message });
-    }
-}
+import Banco from '../models/banco.js';
+import Conta from '../models/conta.js';
 
 const criarConta = (req, res) => {
     const { cpf, nome, saldo } = req.body;
@@ -127,20 +73,62 @@ const deletarConta = (req, res) => {
     }
 }
 
-//CONTA
-//deletar
+class BancoController{
 
-const BancoController = {
-    criarBanco,
-    deletarBanco,
-    listarBancos,
-    buscarPorIdBanco,
-    atualizarBanco,
-    criarConta,
-    listarContas,
-    buscarPorIdConta,
-    atualizarConta,
-    deletarConta,
-};
+    static listarBancos = async (_, res) => {
+        try {
+            const resultado = await Banco.pegarBancos();
+            console.log(resultado);
+            return res.status(200).json(resultado);
+        } catch (err) {
+            return res.status(400).json(err.message);
+        }
+    };
 
-module.exports = BancoController;
+    static listarBanco = async (req, res) => {
+        const { params } = req;
+        try {
+            const resultado = await Banco.pegarBancoPorId(params.bancoId);
+            res.status(200).json(resultado);
+        } catch (err) {
+            res.status(400).json(err.message);
+        }
+    }
+
+    static criarBanco = async (req, res) => {
+        const {nome} = req.body;
+        console.log(nome);
+        const banco = new Banco(nome);
+        try {
+            const resultado = await banco.criar();
+            res.status(201).json({message: 'Banco criado com sucesso!', resultado});
+        } catch (err) {
+            res.status(400).json(err.message);
+        }
+    }
+
+    static atualizarBanco = async (req, res) => {
+        const { bancoId } = req.params;
+        const { nome } = req.body;
+        const banco = new Banco(nome);
+        try {
+            const resultado = await banco.atualizar(bancoId);
+            res.status(200).json(resultado);
+        } catch (err) {
+            res.status(400).json(err.message);
+        }
+    }
+
+    static deletarBanco = async (req, res) => {
+        const { bancoId } = req.params;
+        try {
+            Banco.excluir(bancoId);
+            res.status(200).json({message: 'Banco deletado com sucesso!'});
+        } catch (err) {
+            res.status(400).json(err.message);
+        }
+    }
+
+}
+
+export default BancoController;

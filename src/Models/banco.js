@@ -1,74 +1,36 @@
-class Banco{
+import kn from '../../knex.js';
 
-    static currentId = 1;
+class Banco{
 
     constructor(nome){
         this.nome = nome;
-        this.id = Banco.currentId++;
-        this.contas = [];
     }
 
-    //CRUD
-
-    static returnBanco(banco){
-        return{
-            nome: banco.nome,
-            id: banco.id,
-            contas: banco.contas
-        }
+    static async pegarBancos(){
+        return kn.select('*').from('banco');
     }
 
-    //CREATE
-    static create(bancos, data){
-        const banco = new Banco(data.nome, bancos.length +1);
-        bancos.push(banco);
-        return this.returnBanco(banco);
+    static async pegarBancoPorId(id){
+        console.log(id);
+        const resultado = await kn.select('*').from('banco').where('id', id);
+        return resultado[0];
     }
 
-    //READ
-    static listarBancos(bancos){
-        return bancos.map(banco => this.returnBanco(banco));
+    async criar() {
+        return kn('banco').insert(this)
+        .then((bancoCriado) => kn('banco')
+        .where('id', bancoCriado[0]))
+        .then((bancoSelecionado) => new Banco(bancoSelecionado[0]));
     }
 
-    static buscarPorId(bancos, id){
-        return bancos.find(banco => banco.id == id);
+    async atualizar(id) {
+        await kn('banco').where('id', id).update({... this});
+        return kn.select('*').from('banco').where('id', id);
     }
 
-    //UPDATE
-    static update(bancos, id, data){
-        const banco = this.buscarPorId(bancos, id);
-        if (banco){
-            banco.nome = data.nome || banco.nome;
-        }
-        return banco;
-    }
-
-    //DELETE
-    static deleteBanco(bancos, id){
-        const banco = this.buscarPorId(bancos, id);
-        console.log(banco);
-        if (banco){
-            const index = bancos.indexOf(banco);
-            bancos.splice(index, 1);
-            return true;
-        }
-        return false;
-    }
-
-    associarConta(conta){
-        this.contas.push(conta);
-    }
-
-    listarContas(){
-        return {
-            contas: this.contas
-        }
-    }
-
-    buscarConta(id){
-        const conta = this.contas.find(c => c.id == id);
-        return conta;
+    static async excluir(id) {
+        await kn('banco').where('id', id).del();
     }
 }
 
-module.exports = Banco;
+export default Banco;

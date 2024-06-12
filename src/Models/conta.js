@@ -1,113 +1,84 @@
+import kn from "../../knex.js";
+
 class Conta {
 
-    static currentId = 1;
-
-    constructor(cpf, nome, saldo, bancoId){
+    constructor(cpf, nome, saldo, banco_id) {
         this.nome = nome;
         this.saldo = saldo;
         this.cpf = cpf;
-        this.id = Conta.currentId++;
-        this.bancoId = bancoId;
+        this.banco_id = banco_id;
     }
 
-    //Converter os valores imprimidos para valores monetarios; ex: 4 => 04,00
-    //Implementar a mudança do saldo da conta no banco de dados em todas as funções
-
-    //funções crud
-
-    //retorna os dados de uma conta, para que possa ser exibida após um request
-    static returnConta(conta){
-        return{
-            id: conta.id,
-            cpf: conta.cpf,
-            nome: conta.nome,
-            saldo: conta.saldo,
-            bancoId: conta.bancoId
-        }
+    static async pegarContas(){
+        return kn.select('*').from('conta');
     }
 
-    //função statica para criar uma conta bancária
-    static create(contas, bancos, data){
-        const banco = bancos.find(banco => banco.id === data.id_banco);
-        const createdConta = new Conta(data.cpf, data.nome, data.saldo, banco.id);
-        contas.push(createdConta);
-        banco.associarConta(createdConta);
-        return this.returnConta(createdConta);
+    static async pegarContaPorId(id){
+        return kn.select('*').from('conta').where('id', id);
     }
 
-    //retorna todas as contas presentes no sistema
-    static listarContas(contas){
-        return contas.map(conta => this.returnConta(conta));
+    async criar() {
+        return kn('conta').insert(this)
+        .then((contaCriada) => kn('conta')
+        .where('id', contaCriada[0]))
+        .then((contaSelecionada) => new Conta(contaSelecionada[0]));
     }
 
-    //retorna a busca de uma conta, baseada em seu id
-    static buscarPorId(contas, id){
-        return contas.find(conta => conta.id === id);
-    };
+    async atualizar(id) {
+        await kn('conta').where('id', id).update({... this});
+        return kn.select('*').from('conta').where('id', id);
+    }
 
-    //atualiza as informações de uma conta
-    static update(conta, data){
-        if (conta) {
-            conta.cpf = data.cpf || conta.cpf;
-            conta.nome = data.nome || conta.nome;
-            conta.saldo = data.saldo || conta.saldo;
-        }
-        return conta;
-    };
+    static async excluir(id) {
+        await kn('conta').where('id', id).del();
+    }
 
-    //deleta uma conta
-    static delete(contas, bancos, id_c, id_b){
-        const deletarConta = this.buscarPorId(contas, id_c);
-        if (deletarConta) {
-            const index = contas.indexOf(deletarConta);
-            const banco = bancos.find(banco => banco.id === id_b);
-            const index_c = banco.contas.indexOf(deletarConta);
-            banco.contas.splice(index_c, 1);
-            contas.splice(index, 1);
-            return true;
-        }
-        return false;
-    };
-
-    //funções
-
-    sacar(valor){
-        if(valor > 0.0 && valor <= this.saldo){
-            this.saldo -= valor;
-            console.log("Conta " + this.id + " sacou : R$" + valor + "\n");
-        }
-        else{
+    static async sacar(id, valor){
+        const resultado = await kn.select('saldo').from('conta').where('id', id);
+        const saldoAntigo = parseFloat(resultado[0].saldo);
+        if(valor > 0.0 && valor < saldoAntigo){
+            const saldoNovo = saldoAntigo - valor;
+            await kn('conta').where('id', id).update({ saldo: saldoNovo });
+        } else{
             throw new Error("Valor invalido");
         }
     }
 
-    depositar(valor){
+    static async depositar(id, valor){
+        const resultado = await kn.select('saldo').from('conta').where('id', id);
+        const saldoAntigo = parseFloat(resultado[0].saldo);
         if(valor > 0.0){
-            this.saldo += valor;
-        console.log("Conta " + this.id + " depositou : R$" + valor + "\n");
-        }else{
-            throw new Error('Valor invalido');
+            const saldoNovo = saldoAntigo + valor;
+            await kn('conta').where('id', id).update({ saldo: saldoNovo });
+        } else{
+            throw new Error("Valor invalido");
         }
     }
 
-    transferir(valor, conta){
-        if(valor === 0){
-            throw new Error('Valor invalido');
-        }
-        if(valor > this.saldo){
-            throw new Error('Saldo insuficiente');
-        }
-        if(conta === this || !conta){
-            throw new Error('Conta invalida');
-        }
-        this.saldo -= valor;
-        console.log("Realizado transferência de R$ " + valor + " da conta " + this.id + " para a conta " + conta.id + "\n");
-        conta.receberTransferencia(valor);
-    }
+    static async transferir(id, id_trgt, valor){
+        const resultado = await kn.select('saldo').from('conta').where('id', id);
+        const saldoAntigo = parseFloat(resultado[0].saldo);
 
-    receberTransferencia(valor){
-        this.saldo += valor;
-        console.log("Conta " + this.id + " recebeu transferência de R$" + valor + "\n");
+        const resultado_trgt = await kn.select('saldo').from('conta').where('id', id_trgt);
+        const saldoAntigo_trgt = parseFloat(resultado_trgt[0].saldo);
+        if(valor > 0.0 && valor < saldoAntigo){
+
+            const saldoNovo = saldoAntigo - valor;
+            const saldoNovo_trgt = saldoAntigo_trgt + valor;
+
+            await kn('conta').where('id', id).update({ saldo: saldoNovo });
+            await kn('conta').where('id', id_trgt).update({ saldo: saldoNovo_trgt });
+        } else{
+            throw new Error("Valor invalido");
+        }
+    }
+    
+    static async verSaldo(id){
+        const resultado = await kn.select('saldo').from('conta').where('id', id);
+        console.log(resultado);
+        const saldo = parseFloat(resultado[0].saldo);
+        console.log(saldo);
+        return `O saldo da conta é de R$ ${saldo}`;
     }
 
     verSaldo(){
@@ -116,4 +87,4 @@ class Conta {
     }
 }
 
-module.exports = Conta;
+export default Conta;
