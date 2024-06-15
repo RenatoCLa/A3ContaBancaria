@@ -1,5 +1,5 @@
-const Conta = require('../../Models/conta.js');
-const Banco = require('../../Models/banco.js');
+import Banco from '../../models/banco.js';
+import Conta from '../../models/conta.js';
 
 describe('Testes de Conta', () =>{
 
