@@ -11,7 +11,6 @@ class Banco{
     }
 
     static async pegarBancoPorId(id){
-        console.log(id);
         const resultado = await kn.select('*').from('banco').where('id', id);
         return resultado[0];
     }
@@ -29,7 +28,13 @@ class Banco{
     }
 
     static async excluir(id) {
-        await kn('banco').where('id', id).del();
+        let registro = await kn.select('*').from('banco').where('id', id);
+        if(registro.length != 0){
+            await kn('banco').where('id', id).delete();
+            return registro;
+        }else{
+            return false;
+        }
     }
 }
 

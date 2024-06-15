@@ -21,7 +21,7 @@ class Conta {
         return kn('conta').insert(this)
         .then((contaCriada) => kn('conta')
         .where('id', contaCriada[0]))
-        .then((contaSelecionada) => new Conta(contaSelecionada[0]));
+        .then((contaSelecionada) => contaSelecionada[0]);
     }
 
     async atualizar(id) {
@@ -30,13 +30,19 @@ class Conta {
     }
 
     static async excluir(id) {
-        await kn('conta').where('id', id).del();
+        let registro = await kn.select('*').from('conta').where('id', id);
+        if(registro.length != 0){
+            await kn('conta').where('id', id).delete();
+            return registro;
+        }else{
+            return false;
+        }
     }
 
     static async sacar(id, valor){
         const resultado = await kn.select('saldo').from('conta').where('id', id);
         const saldoAntigo = parseFloat(resultado[0].saldo);
-        if(valor > 0.0 && valor < saldoAntigo){
+        if(valor > 0.0 && valor <= saldoAntigo){
             const saldoNovo = saldoAntigo - valor;
             await kn('conta').where('id', id).update({ saldo: saldoNovo });
         } else{
@@ -61,7 +67,7 @@ class Conta {
 
         const resultado_trgt = await kn.select('saldo').from('conta').where('id', id_trgt);
         const saldoAntigo_trgt = parseFloat(resultado_trgt[0].saldo);
-        if(valor > 0.0 && valor < saldoAntigo){
+        if(valor > 0.0 && valor <= saldoAntigo){
 
             const saldoNovo = saldoAntigo - valor;
             const saldoNovo_trgt = saldoAntigo_trgt + valor;
@@ -75,15 +81,8 @@ class Conta {
     
     static async verSaldo(id){
         const resultado = await kn.select('saldo').from('conta').where('id', id);
-        console.log(resultado);
         const saldo = parseFloat(resultado[0].saldo);
-        console.log(saldo);
         return `O saldo da conta é de R$ ${saldo}`;
-    }
-
-    verSaldo(){
-        console.log("O saldo da conta " + this.id + " é : R$" + this.saldo + "\n");
-        return this.saldo;
     }
 }
 

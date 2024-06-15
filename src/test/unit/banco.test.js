@@ -3,7 +3,6 @@ import Conta from '../../models/conta.js';
 import kn from '../../knex.js';
 
 describe('Testes de Banco', () =>{
-
     it('Deve apresentar as variáveis certas em sua criação', ()=> {
         const banco = new Banco("Banco do Brasil", 1);
         const conta1 = new Conta(1, 9548382, "Gabriel", 200, banco.id);
