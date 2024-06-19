@@ -1,0 +1,151 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "BancoRqst",
+    "collectionId": "4a9b2d37-7395-44db-92c7-ae88b0ecabb7",
+    "dateExported": "2024-06-07T20:29:49.098Z",
+    "version": "1.2",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "8a531cca-2c6d-4c3c-9b61-75dab59ed807",
+            "colId": "4a9b2d37-7395-44db-92c7-ae88b0ecabb7",
+            "containerId": "",
+            "name": "Atualizar Conta",
+            "url": "localhost:3000/1/contas/1",
+            "method": "PUT",
+            "sortNum": 10000,
+            "created": "2024-06-07T16:01:41.194Z",
+            "modified": "2024-06-07T19:23:02.424Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"cpf\": 3,\n  \"nome\": \"supla\",\n  \"saldo\": 500000000000\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "8d70986f-7e1b-485b-81f7-012bae424430",
+            "colId": "4a9b2d37-7395-44db-92c7-ae88b0ecabb7",
+            "containerId": "",
+            "name": "Atualizar Banco",
+            "url": "localhost:3000/bancos/1",
+            "method": "PUT",
+            "sortNum": 20000,
+            "created": "2024-06-07T16:01:50.028Z",
+            "modified": "2024-06-07T16:01:50.028Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"nome\": \"Santander\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "ffc51f31-7901-4953-b3fa-d9d816f9a87b",
+            "colId": "4a9b2d37-7395-44db-92c7-ae88b0ecabb7",
+            "containerId": "",
+            "name": "Buscar Conta Por ID",
+            "url": "localhost:3000/2/contas/2",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2024-06-07T16:01:55.397Z",
+            "modified": "2024-06-07T16:01:55.397Z",
+            "headers": []
+        },
+        {
+            "_id": "42177894-be68-4c72-b941-81165d80506f",
+            "colId": "4a9b2d37-7395-44db-92c7-ae88b0ecabb7",
+            "containerId": "",
+            "name": "Buscar Banco Por ID",
+            "url": "localhost:3000/bancos/2",
+            "method": "GET",
+            "sortNum": 40000,
+            "created": "2024-06-07T16:02:00.445Z",
+            "modified": "2024-06-07T16:02:00.445Z",
+            "headers": []
+        },
+        {
+            "_id": "e312c101-da25-449b-9845-16f6d37d1979",
+            "colId": "4a9b2d37-7395-44db-92c7-ae88b0ecabb7",
+            "containerId": "",
+            "name": "Deletar Banco",
+            "url": "localhost:3000/bancos/1",
+            "method": "DELETE",
+            "sortNum": 50000,
+            "created": "2024-06-07T16:02:06.805Z",
+            "modified": "2024-06-07T16:02:06.805Z",
+            "headers": []
+        },
+        {
+            "_id": "d5fdaf24-e9c4-4458-af38-c9a1783a25bb",
+            "colId": "4a9b2d37-7395-44db-92c7-ae88b0ecabb7",
+            "containerId": "",
+            "name": "Deletar Conta",
+            "url": "localhost:3000/1/contas/1",
+            "method": "DELETE",
+            "sortNum": 60000,
+            "created": "2024-06-07T16:02:11.917Z",
+            "modified": "2024-06-07T16:02:11.917Z",
+            "headers": []
+        },
+        {
+            "_id": "b6536fc7-c846-4093-93f7-ff57f2be7d3c",
+            "colId": "4a9b2d37-7395-44db-92c7-ae88b0ecabb7",
+            "containerId": "",
+            "name": "Listar Contas",
+            "url": "localhost:3000/1/contas",
+            "method": "GET",
+            "sortNum": 70000,
+            "created": "2024-06-07T16:02:17.165Z",
+            "modified": "2024-06-07T16:02:17.165Z",
+            "headers": []
+        },
+        {
+            "_id": "02b7e57f-605c-4ba0-8239-b7b56c6be5df",
+            "colId": "4a9b2d37-7395-44db-92c7-ae88b0ecabb7",
+            "containerId": "",
+            "name": "Listar Bancos",
+            "url": "localhost:3000/bancos",
+            "method": "GET",
+            "sortNum": 80000,
+            "created": "2024-06-07T16:02:21.637Z",
+            "modified": "2024-06-07T16:02:21.637Z",
+            "headers": []
+        },
+        {
+            "_id": "4eda32b6-5d81-46e4-8aeb-fe12f52109cd",
+            "colId": "4a9b2d37-7395-44db-92c7-ae88b0ecabb7",
+            "containerId": "",
+            "name": "Criar Banco",
+            "url": "localhost:3000/bancos",
+            "method": "POST",
+            "sortNum": 90000,
+            "created": "2024-06-07T16:02:25.940Z",
+            "modified": "2024-06-07T16:02:25.940Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"nome\": \"Bradesco\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "e7bab9af-1ea9-4d32-95de-3ce8aaadcf69",
+            "colId": "4a9b2d37-7395-44db-92c7-ae88b0ecabb7",
+            "containerId": "",
+            "name": "Criar Conta",
+            "url": "localhost:3000/1/contas",
+            "method": "POST",
+            "sortNum": 100000,
+            "created": "2024-06-07T16:02:30.549Z",
+            "modified": "2024-06-07T19:27:04.535Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"cpf\": 2312,\n  \"nome\": \"eliana\",\n  \"saldo\": 12\n}",
+                "form": []
+            }
+        }
+    ],
+    "ref": "hbYlSUOO-6rGXvf3lWepavQcS-MzmU3DPu7d_tiad-3FUzrLzQ83G2hmehbfnYhSQK6G9gXcyBeC5UYu2LBDbg"
+}
