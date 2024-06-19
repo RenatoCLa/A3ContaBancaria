@@ -1,7 +1,0 @@
-Trocar o banco de dados presente na base do projeto por esse, para realizar os testes do sistema
-
-*Os testes de banco de dados foram feitos com base na estrutura desse banco de dados, como a quantidade de contas
-presentes nele, entre outras variaveis 
-
-**Esse banco de dados segue a mesma logica do banco de dados padrão, só que com alguns objetos ja presentes dentro
-dele para facilitar os testes do banco de dados
